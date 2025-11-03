@@ -1,2 +1,3 @@
 - Dates of posts should be assigned the moment they are published instead of created
 - Deploy only selected posts (maybe separate posts into working and deployment folders)
+- Tidy up style.css
