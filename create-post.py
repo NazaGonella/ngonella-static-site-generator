@@ -16,7 +16,6 @@ with open("metadata.json", "r", encoding="utf-8") as f:
 
 file_name = sys.argv[1]
 post_title = sys.argv[2]
-author = metadata["author"]
 
 
 posts_path : str = metadata["posts_path"]
@@ -30,7 +29,6 @@ date_header : datetime = datetime.now().strftime("%B {S}, %Y").replace('{S}', st
 # default template for articles
 header : str = f"""---
 title: {post_title}
-author: {author}
 date: {date_header}
 template: template-article.html
 ---
@@ -45,7 +43,6 @@ with open(f"{posts_path}/{file_name}/{file_name}.md", "w", encoding="utf-8") as 
 
 # adds the post entry to home.md
 
-# home_path : str = "./home.md"
 home_path : str = metadata["home_path"]
 date_entry : datetime = datetime.now().strftime("%d/%m/%Y")
 post_entry : str = f"\n{date_entry} [{post_title}]({posts_path[1:]}/{file_name}/)  \n"

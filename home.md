@@ -1,6 +1,5 @@
 ---
-title: Your Name
-author: Your Name
+title: Home
 template: template-home.html
 ---
 

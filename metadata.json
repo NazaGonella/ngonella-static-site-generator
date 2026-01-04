@@ -1,5 +1,6 @@
 {
     "author" : "hola",
     "home_path" : "./home.md",
-    "posts_path" : "./posts"
+    "posts_path" : "./posts",
+    "templates_path" : "./templates"
 }

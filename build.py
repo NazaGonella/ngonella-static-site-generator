@@ -3,6 +3,7 @@
 import os
 import sys
 import subprocess
+import json
 from pathlib import Path
 
 css_path: Path = Path("style.css").resolve()
@@ -12,6 +13,13 @@ rebuild_all = "--all" in sys.argv
 
 markdown_files = [md for md in Path(".").rglob("*.md") if md not in ignored_mds]
 paired_files = [(md, md.parent / "index.html") for md in markdown_files]
+
+
+with open("metadata.json", "r", encoding="utf-8") as f:
+    metadata = json.load(f)
+
+author = metadata["author"]
+templates_path = metadata["templates_path"]
 
 print("### BUILD ###")
 
@@ -32,12 +40,13 @@ for md, html in paired_files:
                     break
                 if line.startswith("template:"):
                     template_to_use = line.split(":", 1)[1].strip()
-
+    
     subprocess.run([
         "pandoc", "-s", str(md),
         "-o", str(html),
         "--css", relative_path_css,
-        "--template", template_to_use,
+        "--template", f"{templates_path}/{template_to_use}",
+        "-M", f"author={author}",
         "-f", "markdown+pipe_tables"
     ])
 
