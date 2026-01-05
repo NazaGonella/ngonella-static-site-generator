@@ -1,5 +1,3 @@
-#!/bin/python
-
 import os
 import sys
 import subprocess
@@ -14,7 +12,6 @@ rebuild_all = "--all" in sys.argv
 markdown_files = [md for md in Path(".").rglob("*.md") if md not in ignored_mds]
 paired_files = [(md, md.parent / "index.html") for md in markdown_files]
 
-
 with open("metadata.json", "r", encoding="utf-8") as f:
     metadata = json.load(f)
 
@@ -24,9 +21,8 @@ templates_path = metadata["templates_path"]
 print("### BUILD ###")
 
 for md, html in paired_files:
-    if not rebuild_all:
-        if html.exists() and html.stat().st_mtime > md.stat().st_mtime:
-            continue
+    if not rebuild_all and html.exists() and html.stat().st_mtime > md.stat().st_mtime:
+        continue
 
     relative_path_css = os.path.relpath(css_path, start=html.parent)
 

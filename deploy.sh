@@ -1,5 +1,3 @@
-#!/bin/bash
-
 main_branch="master"
 working_branch="working"
 
